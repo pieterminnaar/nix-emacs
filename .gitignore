@@ -1,0 +1,6 @@
+gnu-elpa-keyring-*
+gnu-elpa-keyring-*/*
+*.elc
+*/*
+ac-comphist.dat
+*session*
