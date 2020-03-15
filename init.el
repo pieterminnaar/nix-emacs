@@ -1,4 +1,10 @@
+;;; package --- Summary
+;;; Commentary:
+;;; Some summary
+
+;;; Code:
 (require 'package)
+
 
 ;; Add melpa to your packages repositories
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
@@ -6,22 +12,25 @@
 
 (load-theme 'tango-dark)
 
-(setq x-select-enable-primary t)
+
+;;(setq x-select-enable-primary t)
+(setq select-enable-primary t)
 (global-auto-revert-mode 1)
 ;;(global-auto-complete-mode t)
 
-(iswitchb-mode 1)
+(ido-mode 1)
+;; (iswitchb-mode 1)
+(setq ido-show-dot-for-dired t)
 
-
-(defun iswitchb-local-keys ()
- (mapc (lambda (K)
-   (let* ((key (car K)) (fun (cdr K)))
-            (define-key iswitchb-mode-map (edmacro-parse-keys key) fun)))
-          '(("C-f"      . iswitchb-next-match)
-            ("C-b"      . iswitchb-prev-match)
-            ("<right>"  . iswitchb-next-match)
-            ("<left>"   . iswitchb-prev-match))))
-(add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
+;; (defun iswitchb-local-keys ()
+;;  (mapc (lambda (K)
+;;    (let* ((key (car K)) (fun (cdr K)))
+;;             (define-key iswitchb-mode-map (edmacro-parse-keys key) fun)))
+;;           '(("C-f"      . iswitchb-next-match)
+;;             ("C-b"      . iswitchb-prev-match)
+;;             ("<right>"  . iswitchb-next-match)
+;;             ("<left>"   . iswitchb-prev-match))))
+;; (add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
 
 (global-set-key (kbd "M-z") 'shell)
 
@@ -43,7 +52,7 @@
 
 (require 'use-package)
 
-(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+;;(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
 ;; Enable defer and ensure by default for use-package
 ;; Keep auto-save/backup files separate from source code:  https://github.com/scalameta/metals/issues/1027
@@ -76,9 +85,11 @@
 
 (use-package lsp-mode
   ;; Optional - enable lsp-mode automatically in scala files
+  :init (setq lsp-keymap-prefix "C-c l")
   :hook  (scala-mode . lsp)
          (lsp-mode . lsp-lens-mode)
-  :config (setq lsp-prefer-flymake nil))
+	 ;;:config (setq lsp-prefer-flymake nil)
+	 )
 
 ;; Enable nice rendering of documentation on hover
 (use-package lsp-ui)
@@ -123,3 +134,6 @@
  )
 
 (show-paren-mode 1)
+
+(provide 'init)
+;;; init.el ends here
